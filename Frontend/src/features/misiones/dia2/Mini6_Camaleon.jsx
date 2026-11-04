@@ -3,7 +3,7 @@ import MisionMarco from '../MisionMarco'
 import Camaleon from './Camaleon'
 
 const INSTRUCCION =
-  'Construye en Camaleon.jsx un componente que presente SECOP II. Debe mostrar una sección, un h1 con la clase titulo-gigante y un párrafo.'
+  'React compone interfaces con componentes. Completa EtiquetaSecop para mostrar SECOP II y úsalo en Camaleon con un h1 titulo-gigante y un párrafo.'
 
 export default function Mini6Camaleon({ desbloqueada, aprobada, alAprobar }) {
   const camaleonRef = useRef(null)
@@ -11,15 +11,19 @@ export default function Mini6Camaleon({ desbloqueada, aprobada, alAprobar }) {
 
   function verificar() {
     const seccion = camaleonRef.current?.querySelector('section')
+    const etiqueta = seccion?.querySelector('span')
     const titulo = seccion?.querySelector('h1')
     const descripcion = seccion?.querySelector('p')
+    const textoEtiqueta = etiqueta?.textContent.trim() || ''
     const textoTitulo = titulo?.textContent.trim() || ''
     const textoDescripcion = descripcion?.textContent.trim() || ''
+    const etiquetaEsCorrecta = /^secop ii$/i.test(textoEtiqueta)
     const tituloEsMarcador = /^(todo|escribe un título|tu título)$/i.test(textoTitulo)
     const descripcionEsMarcador = /^(todo|escribe una descripción|tu descripción)$/i.test(textoDescripcion)
 
     if (
       seccion &&
+      etiquetaEsCorrecta &&
       titulo?.classList.contains('titulo-gigante') &&
       textoTitulo &&
       !tituloEsMarcador &&
@@ -29,14 +33,14 @@ export default function Mini6Camaleon({ desbloqueada, aprobada, alAprobar }) {
       alAprobar()
       setVerificacion({
         ok: true,
-        mensaje: 'Tu componente muestra una sección, un título y una descripción.',
+        mensaje: 'La etiqueta, el título y la descripción se muestran correctamente.',
       })
       return
     }
 
     setVerificacion({
       ok: false,
-      mensaje: 'Revisa la sección, el h1 con su clase y el párrafo con texto propio.',
+      mensaje: 'Revisa EtiquetaSecop, el h1 con su clase y el párrafo.',
     })
   }
 

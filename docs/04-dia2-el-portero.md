@@ -7,25 +7,39 @@ en el puerto 5173; Django, en el 8000.
 
 **Archivo:** `Frontend/src/features/misiones/dia2/Camaleon.jsx`
 
-En esta primera práctica de React construirás un componente pequeño que presente
-el taller SECOP II.
+**Dificultad:** 3/5. **Tiempo estimado:** 30 minutos.
+
+En esta práctica construirás una tarjeta sencilla usando dos componentes. React
+permite dividir una interfaz en piezas y componerlas; aquí una etiqueta será
+parte de la tarjeta principal.
+
+**Idea clave:** React es una biblioteca de JavaScript para construir interfaces.
+Un componente es una función que devuelve JSX; un componente puede incluir a
+otro, como hará `Camaleon` con `EtiquetaSecop`.
 
 1. Investiga qué es un [componente](https://react.dev/learn/your-first-component)
    y cómo se escribe [JSX](https://react.dev/learn/writing-markup-with-jsx).
-2. En `Camaleon.jsx`, completa la función `Camaleon` para que devuelva una
-   sección con:
+2. En `Camaleon.jsx`, completa `EtiquetaSecop` para mostrar `SECOP II` dentro de
+   un `<span>`.
+3. Completa `Camaleon` para que devuelva una sección que use `<EtiquetaSecop />`
+   y que además tenga:
    - un título `<h1>` con la clase `titulo-gigante`;
    - un párrafo `<p>` que explique, con tus palabras, qué se puede explorar en
      el taller.
-3. Escribe tu propio título y descripción. Por ahora no necesitas props,
+4. Escribe tu propio título y descripción. Por ahora no necesitas props,
    estado ni peticiones a la API.
-4. No modifiques `Mini6_Camaleon.jsx`: ese archivo verifica el reto.
+5. No modifiques `Mini6_Camaleon.jsx`: ese archivo verifica el reto.
 
-**Comprueba:** pulsa **Verificar el componente**. El panel comprueba el título,
-la clase, la sección y el párrafo.
+**Comprueba:** pulsa **Verificar el componente**. El panel comprueba la etiqueta,
+el título, la clase, la sección y el párrafo.
 
-**Antes de programar, responde:** ¿qué hace la función del componente?, ¿qué
-devuelve `return`?, ¿qué diferencia hay entre JSX y HTML?
+**Antes de programar, responde:** ¿para qué sirve React?, ¿qué devuelve un
+componente?, ¿qué diferencia hay entre JSX y HTML?, ¿qué significa que
+`Camaleon` use `<EtiquetaSecop />`?
+
+**Revisa con un compañero:** confirma en el código que `Camaleon` usa el
+componente `EtiquetaSecop` y no reemplaza esa pieza por un `<span>` escrito
+directamente dentro de la tarjeta.
 
 ## Mini 7: El Albañil
 
