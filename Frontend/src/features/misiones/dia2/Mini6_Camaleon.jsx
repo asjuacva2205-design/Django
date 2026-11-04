@@ -3,7 +3,7 @@ import MisionMarco from '../MisionMarco'
 import Camaleon from './Camaleon'
 
 const INSTRUCCION =
-  'Camaleon.jsx muestra un h1 con la clase titulo-gigante. Verifica el componente.'
+  'En Camaleon.jsx cambia solo el texto dentro del span por tu nombre. Conserva el saludo, el h1 y la clase titulo-gigante.'
 
 export default function Mini6Camaleon({ desbloqueada, aprobada, alAprobar }) {
   const camaleonRef = useRef(null)
@@ -11,21 +11,30 @@ export default function Mini6Camaleon({ desbloqueada, aprobada, alAprobar }) {
 
   function verificar() {
     const titulo = camaleonRef.current?.querySelector('h1')
-    const texto = titulo?.textContent.trim() || ''
-    const esMarcador = /^(escribe tu nombre aquí|todo)$/i.test(texto)
+    const span = titulo?.querySelector('span')
+    const nombre = span?.textContent.trim() || ''
+    const conservaSaludo = titulo?.firstChild?.textContent.trim() === 'Hola,'
+    const esMarcador = /^(tu nombre aquí|escribe tu nombre aquí|cambia solo este texto|todo)$/i.test(nombre)
 
-    if (titulo?.classList.contains('titulo-gigante') && texto && !esMarcador) {
+    if (
+      titulo?.classList.contains('titulo-gigante') &&
+      titulo.children.length === 1 &&
+      span?.tagName === 'SPAN' &&
+      conservaSaludo &&
+      nombre &&
+      !esMarcador
+    ) {
       alAprobar()
       setVerificacion({
         ok: true,
-        mensaje: 'El título aparece con la clase solicitada.',
+        mensaje: 'Cambiaste el texto del span y conservaste el título.',
       })
       return
     }
 
     setVerificacion({
       ok: false,
-      mensaje: 'Revisa el h1, su clase y el texto con tu nombre.',
+      mensaje: 'Cambia solo el texto del span. Conserva el saludo, el h1 y la clase.',
     })
   }
 

@@ -1,3 +1,3 @@
 export default function Camaleon() {
-  return <h1 className="titulo-gigante">Escribe tu nombre aquí</h1>
+  return <h1 className="titulo-gigante">Hola, <span>Tu nombre aquí</span></h1>
 }

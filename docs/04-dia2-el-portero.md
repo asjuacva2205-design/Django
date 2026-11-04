@@ -7,13 +7,19 @@ en el puerto 5173; Django, en el 8000.
 
 **Archivo:** `Frontend/src/features/misiones/dia2/Camaleon.jsx`
 
-Completa el componente para mostrar tu nombre en un `<h1>` con la clase
-`titulo-gigante`.
+En esta práctica vas a cambiar una parte pequeña del contenido sin reconstruir
+todo el componente.
+
+1. Lee sobre [componentes](https://react.dev/learn/your-first-component) y
+   [JSX](https://react.dev/learn/writing-markup-with-jsx).
+2. En `Camaleon.jsx`, cambia **solo el texto dentro del `<span>`** por tu nombre.
+3. Conserva el saludo, el `<h1>`, el `<span>` y la clase `titulo-gigante`.
+4. No modifiques `Mini6_Camaleon.jsx`: ese archivo verifica el reto.
 
 **Comprueba:** pulsa **Verificar el componente**. El panel comprueba el título,
-la clase y que el texto ya no sea el marcador inicial.
+el saludo, la clase y que el texto del `<span>` ya no sea el marcador inicial.
 
-**Documentación:** [primeros pasos con React](https://react.dev/learn).
+**Para investigar:** [elemento `<span>` en MDN](https://developer.mozilla.org/es/docs/Web/HTML/Element/span).
 
 ## Mini 7: El Albañil
 
