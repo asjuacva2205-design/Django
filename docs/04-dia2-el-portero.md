@@ -19,8 +19,8 @@ otro, como hará `Camaleon` con `EtiquetaSecop`.
 
 1. Investiga qué es un [componente](https://react.dev/learn/your-first-component)
    y cómo se escribe [JSX](https://react.dev/learn/writing-markup-with-jsx).
-2. En `Camaleon.jsx`, completa `EtiquetaSecop` para mostrar `SECOP II` dentro de
-   un `<span>`.
+2. En `Camaleon.jsx`, crea el componente `EtiquetaSecop`, que muestra `SECOP II`
+   dentro de un `<span>`.
 3. Completa `Camaleon` para que devuelva una sección que use `<EtiquetaSecop />`
    y que además tenga:
    - un título `<h1>` con la clase `titulo-gigante`;

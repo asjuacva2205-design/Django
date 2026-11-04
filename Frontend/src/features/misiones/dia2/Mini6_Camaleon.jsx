@@ -3,7 +3,7 @@ import MisionMarco from '../MisionMarco'
 import Camaleon from './Camaleon'
 
 const INSTRUCCION =
-  'React compone interfaces con componentes. Completa EtiquetaSecop para mostrar SECOP II y úsalo en Camaleon con un h1 titulo-gigante y un párrafo.'
+  'React compone interfaces con componentes. Crea EtiquetaSecop para mostrar SECOP II y úsalo dentro de Camaleon junto con un h1 titulo-gigante y un párrafo.'
 
 export default function Mini6Camaleon({ desbloqueada, aprobada, alAprobar }) {
   const camaleonRef = useRef(null)
