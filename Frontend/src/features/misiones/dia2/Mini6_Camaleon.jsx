@@ -3,38 +3,40 @@ import MisionMarco from '../MisionMarco'
 import Camaleon from './Camaleon'
 
 const INSTRUCCION =
-  'En Camaleon.jsx cambia solo el texto dentro del span por tu nombre. Conserva el saludo, el h1 y la clase titulo-gigante.'
+  'Construye en Camaleon.jsx un componente que presente SECOP II. Debe mostrar una sección, un h1 con la clase titulo-gigante y un párrafo.'
 
 export default function Mini6Camaleon({ desbloqueada, aprobada, alAprobar }) {
   const camaleonRef = useRef(null)
   const [verificacion, setVerificacion] = useState(null)
 
   function verificar() {
-    const titulo = camaleonRef.current?.querySelector('h1')
-    const span = titulo?.querySelector('span')
-    const nombre = span?.textContent.trim() || ''
-    const conservaSaludo = titulo?.firstChild?.textContent.trim() === 'Hola,'
-    const esMarcador = /^(tu nombre aquí|escribe tu nombre aquí|cambia solo este texto|todo)$/i.test(nombre)
+    const seccion = camaleonRef.current?.querySelector('section')
+    const titulo = seccion?.querySelector('h1')
+    const descripcion = seccion?.querySelector('p')
+    const textoTitulo = titulo?.textContent.trim() || ''
+    const textoDescripcion = descripcion?.textContent.trim() || ''
+    const tituloEsMarcador = /^(todo|escribe un título|tu título)$/i.test(textoTitulo)
+    const descripcionEsMarcador = /^(todo|escribe una descripción|tu descripción)$/i.test(textoDescripcion)
 
     if (
+      seccion &&
       titulo?.classList.contains('titulo-gigante') &&
-      titulo.children.length === 1 &&
-      span?.tagName === 'SPAN' &&
-      conservaSaludo &&
-      nombre &&
-      !esMarcador
+      textoTitulo &&
+      !tituloEsMarcador &&
+      textoDescripcion &&
+      !descripcionEsMarcador
     ) {
       alAprobar()
       setVerificacion({
         ok: true,
-        mensaje: 'Cambiaste el texto del span y conservaste el título.',
+        mensaje: 'Tu componente muestra una sección, un título y una descripción.',
       })
       return
     }
 
     setVerificacion({
       ok: false,
-      mensaje: 'Cambia solo el texto del span. Conserva el saludo, el h1 y la clase.',
+      mensaje: 'Revisa la sección, el h1 con su clase y el párrafo con texto propio.',
     })
   }
 

@@ -1,6 +1,6 @@
 export const CLAVE_TABLERO = 'taller-secop-misiones-aprobadas'
 const CLAVE_REVALIDACION = 'taller-secop-misiones-revalidacion-v1'
-const CLAVE_REVALIDACION_MINI6 = 'taller-secop-mini6-revalidacion-v2'
+const CLAVE_REVALIDACION_MINI6 = 'taller-secop-mini6-revalidacion-v3'
 const MISIONES_POR_REVALIDAR = [6, 7, 10, 12]
 
 export function leerAprobadas() {

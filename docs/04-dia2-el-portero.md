@@ -7,19 +7,25 @@ en el puerto 5173; Django, en el 8000.
 
 **Archivo:** `Frontend/src/features/misiones/dia2/Camaleon.jsx`
 
-En esta práctica vas a cambiar una parte pequeña del contenido sin reconstruir
-todo el componente.
+En esta primera práctica de React construirás un componente pequeño que presente
+el taller SECOP II.
 
-1. Lee sobre [componentes](https://react.dev/learn/your-first-component) y
-   [JSX](https://react.dev/learn/writing-markup-with-jsx).
-2. En `Camaleon.jsx`, cambia **solo el texto dentro del `<span>`** por tu nombre.
-3. Conserva el saludo, el `<h1>`, el `<span>` y la clase `titulo-gigante`.
+1. Investiga qué es un [componente](https://react.dev/learn/your-first-component)
+   y cómo se escribe [JSX](https://react.dev/learn/writing-markup-with-jsx).
+2. En `Camaleon.jsx`, completa la función `Camaleon` para que devuelva una
+   sección con:
+   - un título `<h1>` con la clase `titulo-gigante`;
+   - un párrafo `<p>` que explique, con tus palabras, qué se puede explorar en
+     el taller.
+3. Escribe tu propio título y descripción. Por ahora no necesitas props,
+   estado ni peticiones a la API.
 4. No modifiques `Mini6_Camaleon.jsx`: ese archivo verifica el reto.
 
 **Comprueba:** pulsa **Verificar el componente**. El panel comprueba el título,
-el saludo, la clase y que el texto del `<span>` ya no sea el marcador inicial.
+la clase, la sección y el párrafo.
 
-**Para investigar:** [elemento `<span>` en MDN](https://developer.mozilla.org/es/docs/Web/HTML/Element/span).
+**Antes de programar, responde:** ¿qué hace la función del componente?, ¿qué
+devuelve `return`?, ¿qué diferencia hay entre JSX y HTML?
 
 ## Mini 7: El Albañil
 
