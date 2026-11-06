@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Día 3 — Pentatlón Big Data</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; }
+    h1, h2 { color: #1a365d; }
+    code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; }
+    pre { background: #0f172a; color: #e2e8f0; padding: 12px; border-radius: 8px; overflow: auto; }
+    .card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin: 16px 0; }
+  </style>
+</head>
+<body>
+  <h1>Día 3: Pentatlón Big Data</h1>
+  <p>Antes de empezar: confirma que el Mini 2 está hecho y que existe la tabla <code>contratos_contrato</code>. El Mini 12 necesita al menos un contrato.</p>
+
+  <h2>Descargar la base de datos (SECOP II)</h2>
+  <div class="card">
+    <p>Desde <code>Backend/</code>, con el entorno virtual activo:</p>
+    <pre>python manage.py migrate
+python manage.py descargar_secop</pre>
+    <p>Por defecto descarga 5000 contratos. Para otra cantidad:</p>
+    <pre>python manage.py descargar_secop 10000</pre>
+    <p>El importador omite identificadores que ya existen, así que puedes ejecutarlo varias veces sin duplicar.</p>
+    <p>Token opcional: si datos.gov.co aplica límite, guarda <code>SOCRATA_APP_TOKEN</code> en <code>Backend/.env</code>.</p>
+  </div>
+
+  <h2>Minis del Día 3</h2>
+  <div class="card">
+    <h3>Mini 11 — La Avalancha</h3>
+    <p>Escribe <code>InyeccionMasivaView</code> y <code>descargar_contratos(cantidad)</code> en <code>views.py</code>, más la ruta <code>contratos/inyeccion/</code> en <code>urls.py</code>. Valida 1–50000, pagina con <code>consultar_pagina</code>, convierte con <code>fila_a_contrato</code>, evita duplicados y usa <code>bulk_create</code>. Comprueba con el botón "Descargar contratos".</p>
+  </div>
+  <div class="card">
+    <h3>Mini 12 — El Analista</h3>
+    <p>Crea <code>EstadisticasView</code> en <code>GET /api/contratos/estadisticas/</code> con <code>aggregate()</code> y <code>annotate()</code>. Conecta <code>por_estado</code> a la gráfica (lista con <code>estado</code> y <code>contratos</code>).</p>
+  </div>
+  <div class="card">
+    <h3>Mini 13 — La Aguja en el Pajar</h3>
+    <p>En <code>ContratoViewSet</code> configura <code>SearchFilter</code>, <code>OrderingFilter</code>, filtro por <code>?estado=</code> y <code>ordering_fields</code>.</p>
+  </div>
+  <div class="card">
+    <h3>Mini 14 — El Regulador</h3>
+    <p>Crea <code>contratos/paginacion.py</code> con <code>PageNumberPagination</code> (<code>page_size=50</code>, <code>page_size_query_param='page_size'</code>) y apúntalo en <code>settings.py</code>.</p>
+  </div>
+  <div class="card">
+    <h3>Mini 15 — El Limpiador</h3>
+    <p>Vista DELETE: sin <code>{"confirmar": true}</code> responde 400; con confirmación borra todo y responde <code>eliminados</code> y <code>ms</code>.</p>
+  </div>
+
+  <h2>Cierre</h2>
+  <p>Revisa que las 15 misiones estén aprobadas. Si vas a repetir la carga, primero borra los datos de prueba con el Mini 15.</p>
+</body>
+</html>

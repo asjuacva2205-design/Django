@@ -1,2 +1,15 @@
-# TODO (RETO 3) - Registrar el modelo Contrato en Django Admin con un
-# ModelAdmin configurado (list_display, search_fields y list_filter).
+from django.contrib import admin
+from .models import Contrato
+
+
+@admin.register(Contrato)
+class ContratoAdmin(admin.ModelAdmin):
+    list_display = (
+        'id_contrato',
+        'entidad_compradora',
+        'estado',
+        'valor_total',
+        'fecha_firma',
+    )
+    search_fields = ('id_contrato', 'entidad_compradora', 'descripcion')
+    list_filter = ('estado', 'fecha_firma')

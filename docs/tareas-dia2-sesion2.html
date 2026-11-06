@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tareas del Día 2 — Entrega 11:00 am</title>
+  <style>
+    :root {
+      --azul-oscuro: #1a365d;
+      --azul: #2b6cb0;
+      --crema: #fffaf0;
+      --borde: #e2d9c8;
+      --ok: #2f855a;
+      --reto: #975a16;
+      --peligro: #9b2c2c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--crema);
+      color: #2d3748;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      line-height: 1.65;
+    }
+    header { text-align: center; margin-bottom: 36px; }
+    header h1 { color: var(--azul-oscuro); margin-bottom: 6px; }
+    header p { color: #6b7280; margin: 4px 0; }
+    .reloj {
+      display: inline-block;
+      background: var(--azul-oscuro);
+      color: #fff;
+      padding: 6px 18px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .intro { text-align: center; color: #4a5568; max-width: 640px; margin: 18px auto 30px; }
+
+    .tarea {
+      background: #fff;
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 1px 4px rgba(26, 54, 93, 0.06);
+    }
+    .tarea-cabecera {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .tarea-numero {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--azul-oscuro);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .tarea-cabecera h2 { color: var(--azul-oscuro); margin: 0; font-size: 1.35rem; }
+    .tarea-cabecera small { display: block; color: var(--azul); font-weight: 600; }
+    .etiqueta {
+      margin-left: auto;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: #ebf4ff;
+      color: var(--azul);
+      white-space: nowrap;
+    }
+    h3 {
+      color: var(--azul-oscuro);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin: 20px 0 8px;
+    }
+    .check { list-style: none; padding-left: 0; margin: 6px 0; }
+    .check li { padding-left: 24px; position: relative; margin-bottom: 4px; }
+    .check li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--ok);
+      font-weight: 700;
+    }
+
+    .caja {
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 10px 0;
+      font-size: 0.95rem;
+    }
+    .caja-pista { background: #ebf8ff; border-left: 4px solid var(--azul); }
+    .caja-reto { background: #fffaf0; border-left: 4px solid var(--reto); }
+    .caja-rompe { background: #fff5f5; border-left: 4px solid var(--peligro); }
+    .caja-archivo {
+      background: #f0fff4;
+      border-left: 4px solid var(--ok);
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.88rem;
+    }
+    .caja strong { display: block; margin-bottom: 4px; }
+    code {
+      background: #edf2f7;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.88em;
+      color: #2d3748;
+    }
+    ol, ul { margin: 6px 0; padding-left: 22px; }
+    li { margin-bottom: 4px; }
+
+    .entrega {
+      background: var(--azul-oscuro);
+      color: #fff;
+      border-radius: 14px;
+      padding: 22px 28px;
+      margin-top: 36px;
+    }
+    .entrega h2 { margin-top: 0; color: #fff; }
+    .entrega li { margin-bottom: 6px; }
+    .entrega .animo { text-align: center; margin-top: 14px; font-weight: 600; color: #fbd38d; }
+
+    footer { text-align: center; color: #a0aec0; font-size: 0.85rem; margin-top: 40px; }
+    @media print {
+      body { background: #fff; padding: 10px; }
+      .tarea { break-inside: avoid; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Tareas del Día 2</h1>
+    <p><span class="reloj">Entrega: 11:00 am — en lo que queda de esta hora</span></p>
+    <p>Tres tareas, de menos a más difícil. Sin reloj por bloque: cada uno a su ritmo, en orden.</p>
+  </header>
+
+  <p class="intro">
+    Pueden usar sus apuntes, la guía del taller y ayudarse entre compañeros.
+    Lo importante es que entiendan lo que hacen, no solo que funcione.
+    Si alguna tarea se les complica, escriban al grupo y la revisamos juntos.
+  </p>
+
+  <!-- TAREA 1 -->
+  <section class="tarea">
+    <div class="tarea-cabecera">
+      <div class="tarea-numero">1</div>
+      <h2><small>Mini 7 · useState</small>Contador completo</h2>
+      <span class="etiqueta">15 min aprox.</span>
+    </div>
+
+    <h3>Lo que deben lograr</h3>
+    <p>Ampliar el contador que ya tienen. Además del botón <b>Aumentar</b>, agreguen un botón <b>Disminuir</b> y un botón <b>Reiniciar</b>.</p>
+
+    <h3>Cómo saben que terminaron</h3>
+    <ul class="check">
+      <li>Aumentar suma 1, Disminuir resta 1 y Reiniciar vuelve el número a 0.</li>
+      <li>La pantalla se actualiza sola cada vez que presionan un botón.</li>
+    </ul>
+
+    <div class="caja caja-archivo">
+      Archivo a editar: <code>Frontend/src/features/misiones/dia2/Contador.jsx</code><br />
+      Copien la función <code>aumentar()</code> dos veces y cambien la operación;
+      cada botón nuevo lleva <code>type="button"</code> y su propio <code>onClick</code>.
+    </div>
+
+    <div class="caja caja-rompe">
+      <strong>¿El botón "Verificar el contador" dejó de aprobar?</strong>
+      El Mini 7 comprueba el contador con los atributos <code>data-cuenta</code>
+      y <code>data-aumentar</code>. Corrijanlo en el mismo archivo
+      <code>Contador.jsx</code>:
+      <ul>
+        <li>El número debe seguir dentro de un <code>&lt;output data-cuenta&gt;</code>.</li>
+        <li>El botón que suma debe seguir teniendo <code>data-aumentar</code>.</li>
+        <li>Los botones nuevos (Disminuir, Reiniciar) van aparte, sin quitar esos dos.</li>
+      </ul>
+    </div>
+
+    <div class="caja caja-pista">
+      <strong>Pista:</strong> los tres botones cambian el número con
+      <code>setCuenta</code>. Si intentan cambiar la variable directamente
+      (<code>cuenta = cuenta + 1</code>), la pantalla no se actualiza.
+    </div>
+
+    <div class="caja caja-reto">
+      <strong>Reto extra (elija uno solo, no los dos):</strong> que Disminuir no
+      deje bajar de 0. Dentro de la función, un <code>if</code> que pregunte si
+      <code>cuenta &gt; 0</code> antes de llamar a <code>setCuenta</code>.
+    </div>
+
+    <h3>Entrega</h3>
+    <ol>
+      <li>Captura del contador con el número ya cambiado.</li>
+      <li>Una frase explicando por qué se usa <code>setCuenta</code> y no <code>cuenta = cuenta + 1</code>.</li>
+    </ol>
+  </section>
+
+  <!-- TAREA 2 -->
+  <section class="tarea">
+    <div class="tarea-cabecera">
+      <div class="tarea-numero">2</div>
+      <h2><small>Minis 8 y 10 · fetch y map</small>Más datos en la lista</h2>
+      <span class="etiqueta">15 min aprox.</span>
+    </div>
+
+    <h3>Lo que deben lograr</h3>
+    <p>Hoy la lista de contratos solo muestra el <code>id_contrato</code>. Cámbienla para que cada contrato muestre también la <b>entidad compradora</b> y el <b>valor total</b>.</p>
+
+    <div class="caja caja-archivo">
+      Archivo a editar: <code>Frontend/src/features/misiones/dia2/Listado.jsx</code><br />
+      Todo pasa dentro del <code>&lt;li&gt;</code>: agreguen los dos textos nuevos
+      a lo que ya se imprime.
+    </div>
+
+    <h3>Cómo saben que terminaron</h3>
+    <ul class="check">
+      <li>Cada <code>&lt;li&gt;</code> de la lista muestra los tres datos del contrato.</li>
+      <li>No aparece ninguna advertencia de <code>key</code> en la consola del navegador (F12).</li>
+    </ul>
+
+    <div class="caja caja-pista">
+      <strong>Pista:</strong> abran <code>http://127.0.0.1:8000/api/contratos/</code>
+      y revisen cómo se llaman exactamente los campos en el JSON. Los nombres deben
+      escribirse igual en React: si el JSON dice <code>entidad_compradora</code>,
+      escribir <code>entidadCompradora</code> no funciona.
+      <br /><br />
+      Cada <code>&lt;li&gt;</code> sigue necesitando su <code>key</code>. No la borren.
+    </div>
+
+    <div class="caja caja-reto">
+      <strong>Reto extra:</strong> mostrar también el campo <code>departamento</code>,
+      que agregaron de tarea del Día 1. Es el mismo patrón: un campo más del objeto
+      <code>contrato</code>.
+    </div>
+
+    <h3>Entrega</h3>
+    <ol>
+      <li>Captura de la lista en pantalla con los tres datos visibles.</li>
+      <li>Una frase explicando para qué sirve la <code>key</code> en un <code>map</code>.</li>
+    </ol>
+  </section>
+
+  <!-- TAREA 3 -->
+  <section class="tarea">
+    <div class="tarea-cabecera">
+      <div class="tarea-numero">3</div>
+      <h2><small>Mini 9 · CORS</small>Rompan CORS a propósito</h2>
+      <span class="etiqueta">25 min aprox.</span>
+    </div>
+
+    <h3>Lo que deben lograr</h3>
+    <p>Provocar el error de CORS a propósito, entender qué dice y arreglarlo.</p>
+
+    <h3>Pasos</h3>
+    <ol>
+      <li>En <code>Backend/config/settings.py</code>, quiten de
+        <code>CORS_ALLOWED_ORIGINS</code> el origen
+        <code>http://localhost:5173</code>. Guarden y reinicien Django
+        (Ctrl+C y <code>python manage.py runserver</code> de nuevo).</li>
+      <li>Recarguen la página de React y abran la consola (F12). Lean el error.</li>
+      <li>En la pestaña <b>Network</b>, busquen la petición a
+        <code>/api/contratos/</code> y anoten qué status aparece.</li>
+      <li>Vuelvan a poner el origen, guarden, reinicien Django y comprueben que todo funciona otra vez.</li>
+    </ol>
+
+    <div class="caja caja-pista">
+      <strong>Dónde aparece el error:</strong> en Console puede verse solo como
+      <code>CORS error</code> o una franja roja sin mucho texto. El detalle completo
+      está en la pestaña <b>Network</b>, haciendo clic en la petición fallida.
+      Ese es el mensaje que deben capturar.
+    </div>
+
+    <h3>Cómo saben que terminaron</h3>
+    <ul class="check">
+      <li>Vieron el error <code>blocked by CORS policy</code> y después la lista funcionando de nuevo.</li>
+    </ul>
+
+    <div class="caja caja-reto">
+      <strong>Reto extra:</strong> probar qué pasa si el origen se escribe con un
+      puerto distinto, por ejemplo <code>http://localhost:5174</code>, y explicar
+      por qué falla.
+    </div>
+
+    <h3>Entrega</h3>
+    <ol>
+      <li>Captura del error de CORS.</li>
+      <li>Explicación de 3 o 4 líneas, con sus palabras, respondiendo:
+        <ul>
+          <li>¿Qué es un origen?</li>
+          <li>¿Quién bloquea la respuesta: Django o el navegador?</li>
+          <li>¿Qué hace la lista <code>CORS_ALLOWED_ORIGINS</code>?</li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ENTREGA -->
+  <section class="entrega">
+    <h2>Cómo entregar</h2>
+    <ul>
+      <li>Mándennos las capturas y las explicaciones escritas <b>antes de las 11:00</b>.</li>
+      <li>Todo junto en un solo mensaje o carpeta, con los archivos identificados: <code>tarea1-contador.png</code>, <code>tarea2-lista.png</code>, <code>tarea3-cors.png</code>.</li>
+      <li>Las explicaciones van en el texto del mensaje.</li>
+      <li>Si alguna tarea se les complica, escriban y la revisamos juntos.</li>
+    </ul>
+    <p class="animo">
+      Con estas tres repasan todo el recorrido de hoy: estado, API y permisos del navegador.
+    </p>
+  </section>
+
+  <footer>Taller SECOP II · Día 2 · Django + React</footer>
+</body>
+</html>

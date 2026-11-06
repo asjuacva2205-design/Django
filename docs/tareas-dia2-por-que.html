@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Por qué esta tarea y cómo se evalúa — Día 2</title>
+  <style>
+    :root {
+      --azul-oscuro: #1a365d;
+      --azul: #2b6cb0;
+      --crema: #fffaf0;
+      --borde: #e2d9c8;
+      --ok: #2f855a;
+      --arena: #975a16;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--crema);
+      color: #2d3748;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      line-height: 1.65;
+    }
+    header { text-align: center; margin-bottom: 30px; }
+    header h1 { color: var(--azul-oscuro); margin-bottom: 4px; }
+    header p { color: #6b7280; margin: 4px 0; }
+    .marco-eval {
+      background: #fff;
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      padding: 20px 26px;
+      margin-bottom: 28px;
+    }
+    .marco-eval h2 { color: var(--azul-oscuro); margin-top: 0; font-size: 1.2rem; }
+    .tarea {
+      background: #fff;
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 1px 4px rgba(26, 54, 93, 0.06);
+    }
+    .tarea-cabecera { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .tarea-numero {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--azul-oscuro);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .tarea-cabecera h2 { color: var(--azul-oscuro); margin: 0; font-size: 1.3rem; }
+    .tarea-cabecera small { display: block; color: var(--azul); font-weight: 600; }
+    h3 {
+      color: var(--azul-oscuro);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin: 20px 0 8px;
+    }
+    .caja { border-radius: 10px; padding: 12px 16px; margin: 12px 0; font-size: 0.95rem; }
+    .caja-por-que { background: #ebf8ff; border-left: 4px solid var(--azul); }
+    .caja-demuestra { background: #f0fff4; border-left: 4px solid var(--ok); }
+    .caja-eval { background: #fffaf0; border-left: 4px solid var(--arena); }
+    .caja strong.rol { display: block; margin-bottom: 6px; color: var(--azul-oscuro); }
+    code {
+      background: #edf2f7;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.88em;
+      color: #2d3748;
+    }
+    ul { margin: 6px 0; padding-left: 22px; }
+    li { margin-bottom: 4px; }
+    table { border-collapse: collapse; width: 100%; font-size: 0.92rem; margin: 10px 0; }
+    th, td { border: 1px solid var(--borde); padding: 8px 10px; text-align: left; vertical-align: top; }
+    th { background: #f7f2e8; color: var(--azul-oscuro); }
+    footer { text-align: center; color: #a0aec0; font-size: 0.85rem; margin-top: 40px; }
+    @media print { body { background: #fff; } .tarea { break-inside: avoid; box-shadow: none; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Por qué esta tarea y cómo se evalúa</h1>
+    <p>Tareas del Día 2 · documentación del taller</p>
+  </header>
+
+  <section class="marco-eval">
+    <h2>La evaluación, en una línea</h2>
+    <p>
+      Estas tareas <b>no tienen nota</b. No suman puntos, no hay tabla de
+      calificaciones y no se comparan aprendices. Se evalúan de una sola forma:
+      cada tarea tiene una lista de criterios, y la entrega se revisa contra esa
+      lista con tres resultados posibles.
+    </p>
+    <table>
+      <tr>
+        <th>Resultado</th>
+        <th>Qué significa</th>
+        <th>Qué sigue</th>
+      </tr>
+      <tr>
+        <td><b>Cumple</b></td>
+        <td>La captura muestra el resultado y la frase responde la pregunta.</td>
+        <td>Se bloquea la tarea y sigue el día siguiente.</td>
+      </tr>
+      <tr>
+        <td><b>Casi</b></td>
+        <td>Falta un criterio (por ejemplo, la frase está copiada de un compañero o la captura no muestra el cambio).</td>
+        <td>Se pide una segunda entrega en la siguiente sesión, con la misma tarea.</td>
+      </tr>
+      <tr>
+        <td><b>Pendiente</b></td>
+        <td>No entregó o no terminó.</td>
+        <td>Se revisa juntos al final de la hora o en la sesión 3 del día. No hay castigo ni penalización: el bloqueo del día siguiente se abre con la tarea lista.</td>
+      </tr>
+    </table>
+    <p>
+      La regla que se comunica al aprendiz: <b>lo que se evalúa es la
+      explicación, no la pantallaza</b>. Un contador funcionando con una frase
+      mal escrita no cumple; un contador con un reto extra y una frase bien
+      argumentada sí, aunque no haya alcanzado el reto de lo demás.
+    </p>
+  </section>
+
+  <!-- TAREA 1 -->
+  <section class="tarea">
+    <div class="tarea-cabecera">
+      <div class="tarea-numero">1</div>
+      <h2><small>Mini 7 · useState</small>Contador completo</h2>
+    </div>
+
+    <div class="caja caja-por-que">
+      <strong class="rol">Por qué esta tarea</strong>
+      Después de la sesión, el error número uno de un aprendiz de React es
+      cambiar la variable a mano y esperar que la pantalla siga el cambio.
+      Esta tarea fuerza tres veces la misma decisión (Aumentar, Disminuir,
+      Reiniciar) con el mismo dato: si el cambio va por <code>setCuenta</code>
+      o por asignación directa. Repetir la decisión tres veces en un archivo de
+      20 líneas deja el hábito fijado más barato que cualquier explicación.
+      Además Reiniciar plantea el caso más fino: el estado vuelve a un valor
+      fijo, no depende de lo anterior.
+    </div>
+
+    <div class="caja caja-demuestra">
+      <strong class="rol">Qué demuestra el aprendiz cuando la termina</strong>
+      <ul>
+        <li>Distinguir variable de estado: sabe quién controla lo que se ve en pantalla.</li>
+        <li>Leer la firma de una función y replicar el patrón de <code>aumentar()</code> sin copiar el archivo de otro.</li>
+        <li>Conectar un <code>onClick</code> a una función que él mismo escribió, no a una ya dada por la guía.</li>
+      </ul>
+    </div>
+
+    <div class="caja caja-eval">
+      <strong class="rol">Cómo se evalúa (sin nota)</strong>
+      <ul>
+        <li>Criterio 1 — la captura muestra los tres botones y el número distinto de 0 o de lo que se ve al arrancar.</li>
+        <li>Criterio 2 — la frase menciona <code>setCuenta</code> y el motivo (la pantalla no se actualiza sola sin él). No se acepta "porque React no funciona de otra forma": tiene que nombrar el mecanismo.</li>
+        <li>Se pasa si cumple los dos. El reto extra (no bajar de 0) no suma: solo refuerza el uso de <code>if</code> antes de <code>setCuenta</code>, y es material de conversación en la revisión.</li>
+        <li>Bandera roja de verificación: si el botón verificar del Mini 7 quedó aprobado con el contador cambiado, no hay problema — pero si la captura ya no muestra <code>data-cuenta</code>/<code>data-aumentar</code>, hay que revisar juntos qué se movió y devolverlo.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TAREA 2 -->
+  <section class="tarea">
+    <div class="tarea-cabecera">
+      <div class="tarea-numero">2</div>
+      <h2><small>Minis 8 y 10 · fetch y map</small>Más datos en la lista</h2>
+    </div>
+
+    <div class="caja caja-por-que">
+      <strong class="rol">Por qué esta tarea</strong>
+      El puente Backend-React del taller se rompe en el mismo punto siempre: el
+      aprendiz ve la lista y asume que los nombres de campo que él eligió son
+      los correctos. Esta tarea lo obliga a abrir el JSON del endpoint y a
+      escribir en React exactamente lo que el contrato del Backend entrega:
+      <code>entidad_compradora</code> y <code>valor_total</code>. Es la primera
+      vez que su interfaz muestra datos reales de la base de datos PostgreSQL
+      descargada de SECOP II, y la <code>key</code> aparece como requisito
+      formal (cero warning en consola) en lugar de como teoría.
+    </div>
+
+    <div class="caja caja-demuestra">
+      <strong class="rol">Qué demuestra el aprendiz cuando la termina</strong>
+      <ul>
+        <li>Leer un JSON real y mapear cada campo a lo que pinta el componente.</li>
+        <li>Respetar el contrato Backend-Frontend: mismos nombres, mismo formato.</li>
+        <li>Usar la consola como herramienta de trabajo, no como último recurso: la ausencia de warning de <code>key</code> solo se comprueba mirándola.</li>
+        <li>Si agregó <code>departamento</code>, saber que un campo nuevo del modelo viaja automáticamente por el serializer cuando no hay <code>fields</code> manuales. Es terreno del Mini del Día 3 y queda preparado.</li>
+      </ul>
+    </div>
+
+    <div class="caja caja-eval">
+      <strong class="rol">Cómo se evalúa (sin nota)</strong>
+      <ul>
+        <li>Criterio 1 — cada <code>li</code> de la captura muestra los tres datos: id, entidad, valor.</li>
+        <li>Criterio 2 — la consola de la captura está visible (F12 abierto) y sin warning de key.</li>
+        <li>Criterio 3 — la frase explica la key con su propio criterio: identificación estable de cada elemento para que React actualice bien la lista. Se rechaza solo la frase "es obligatoria y ya".</li>
+        <li>Nota de revisión rápida: si en la lista aparece <code>undefined</code>, el aprendiz se saltó leer el JSON y escribió el campo mal. Ese desliz es material de feedback inmediato, no tarea que repetir: se corrige ahí, delante de él.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TAREA 3 -->
+  <section class="tarea">
+    <div class="tarea-cabecera">
+      <div class="tarea-numero">3</div>
+      <h2><small>Mini 9 · CORS</small>Rompan CORS a propósito</h2>
+    </div>
+
+    <div class="caja caja-por-que">
+      <strong class="rol">Por qué esta tarea</strong>
+      CORS es el concepto más abstracto del día, y por eso no se explica: se
+      rompe. Que un aprendiz provoque el error, lo lea en Network y lo repare
+      con sus manos deja tres aprendizajes en uno: el error no es del Backend ni
+      de React, es de la conversación entre ambos y quien la regula es el
+      navegador; el mensaje de error tiene ubicación fija (F12, Network) y es
+      legible; y tocar <code>settings.py</code> obliga a reiniciar
+      <code>runserver</code> — el tropiezo más común de su vida con Django,
+      ensayado en un entorno controlado. Además prepara el Día 3, donde
+      trabajarán con datos que cruzan origen todo el día.
+    </div>
+
+    <div class="caja caja-demuestra">
+      <strong class="rol">Qué demuestra el aprendiz cuando la termina</strong>
+      <ul>
+        <li>Definir origen sin la guía: protocolo + dominio + puerto como una unidad.</li>
+        <li>Distinguir entre respuesta del servidor y lectura del navegador: quien responde bien las tres preguntas entendió quién manda en el bloqueo.</li>
+        <li>Diagnosticar con Network: ubicar la petición, ver el status, leer el mensaje y abrir la solución por la ruta correcta (el encabezado en Django), no por adivinación.</li>
+        <li>Incluir el reinicio de Django como paso, no como remedio improvisado.</li>
+      </ul>
+    </div>
+
+    <div class="caja caja-eval">
+      <strong class="rol">Cómo se evalúa (sin nota)</strong>
+      <ul>
+        <li>Criterio 1 — captura del error en Console o Network: quien entregue solo un print de pantalla sin el mensaje marcado no cumple todavía.</li>
+        <li>Criterio 2 — captura o descripción de la reparación: el origen devuelto a <code>CORS_ALLOWED_ORIGINS</code> y la lista funcionando.</li>
+        <li>Criterio 3 — la explicación de 3-4 líneas responde las tres preguntas. No se exige la terminología exacta: se aprueba que destaque el navegador como quien bloquea y la lista como los orígenes autorizados.</li>
+        <li>Bandera roja de diagnóstico falso: si la explicación dice que "Django da el error" o que "CORS es de seguridad contra la API", se regresa con una pregunta guiada ("¿quién responde? ¿quién decide mostrarla?") antes de aprobar. La idea es que el aprendiz salga con el modelo mental correcto, no con la frase correcta.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>Documento del instructor · Taller SECOP II · Día 2</footer>
+</body>
+</html>

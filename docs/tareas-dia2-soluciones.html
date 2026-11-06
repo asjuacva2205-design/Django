@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Soluciones de referencia — Tareas del Día 2</title>
+  <style>
+    :root {
+      --azul-oscuro: #1a365d;
+      --azul: #2b6cb0;
+      --crema: #fffaf0;
+      --borde: #e2d9c8;
+      --ok: #2f855a;
+      --reto: #975a16;
+      --peligro: #9b2c2c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--crema);
+      color: #2d3748;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      line-height: 1.65;
+    }
+    header { text-align: center; margin-bottom: 30px; }
+    header h1 { color: var(--azul-oscuro); margin-bottom: 4px; }
+    header p { color: #6b7280; margin: 4px 0; }
+    .aviso-docente {
+      background: #fff5f5;
+      border-left: 4px solid var(--peligro);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 0 auto 26px;
+      max-width: 640px;
+      font-size: 0.92rem;
+    }
+    .tarea {
+      background: #fff;
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 1px 4px rgba(26, 54, 93, 0.06);
+    }
+    .tarea-cabecera { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .tarea-numero {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--azul-oscuro);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .tarea-cabecera h2 { color: var(--azul-oscuro); margin: 0; font-size: 1.3rem; }
+    .tarea-cabecera small { display: block; color: var(--azul); font-weight: 600; }
+    h3 {
+      color: var(--azul-oscuro);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin: 20px 0 8px;
+    }
+    pre {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 14px 16px;
+      border-radius: 10px;
+      overflow: auto;
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+    code.inline {
+      background: #edf2f7;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.88em;
+      color: #2d3748;
+    }
+    pre code { font-family: Consolas, "Courier New", monospace; }
+    .caja { border-radius: 10px; padding: 12px 16px; margin: 12px 0; font-size: 0.95rem; }
+    .caja-ok { background: #f0fff4; border-left: 4px solid var(--ok); }
+    .caja-reto { background: #fffaf0; border-left: 4px solid var(--reto); }
+    .caja li { margin-bottom: 6px; }
+    strong.rol { display: block; margin-bottom: 6px; color: var(--azul-oscuro); }
+    footer { text-align: center; color: #a0aec0; font-size: 0.85rem; margin-top: 40px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Soluciones de referencia</h1>
+    <p>Tareas del Día 2 · uso exclusivo del instructor</p>
+  </header>
+
+  <div class="aviso-docente">
+    Este documento no sale a los aprendices: es la respuesta que vas a tener
+    a la mano cuando lleguen las capturas, para comparar en segundos si lo que
+    entregaron coincide con el resultado esperado.
+  </div>
+
+  <!-- TAREA 1 -->
+  <section class="tarea">
+    <div class="tarea-cabecera">
+      <div class="tarea-numero">1</div>
+      <h2><small>Mini 7 · useState</small>Contador completo</h2>
+    </div>
+
+    <p>
+      Archivo: <code class="inline">Frontend/src/features/misiones/dia2/Contador.jsx</code>.
+      Los tres botones comparten el mismo estado <code class="inline">cuenta</code>.
+      Lo único nuevo frente al punto de partida son dos funciones y dos botones;
+      los atributos <code class="inline">data-cuenta</code> y
+      <code class="inline">data-aumentar</code> permanecen intactos.
+    </p>
+
+    <pre><code>import { useState } from 'react'
+
+export default function Contador() {
+  const [cuenta, setCuenta] = useState(0)
+
+  function aumentar() {
+    setCuenta(cuenta + 1)
+  }
+
+  function disminuir() {
+    setCuenta(cuenta - 1)
+  }
+
+  function reiniciar() {
+    setCuenta(0)
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;output data-cuenta&gt;{cuenta}&lt;/output&gt;
+      &lt;button type="button" data-aumentar onClick={aumentar}&gt;
+        Colocar pieza
+      &lt;/button&gt;
+      &lt;button type="button" onClick={disminuir}&gt;
+        Quitar pieza
+      &lt;/button&gt;
+      &lt;button type="button" onClick={reiniciar}&gt;
+        Reiniciar
+      &lt;/button&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+
+    <div class="caja caja-reto">
+      <strong class="rol">Reto extra — no bajar de 0</strong>
+      <pre><code>function disminuir() {
+  if (cuenta &gt; 0) {
+    setCuenta(cuenta - 1)
+  }
+}</code></pre>
+    </div>
+
+    <div class="caja caja-ok">
+      <strong class="rol">Respuesta esperada en la frase de entrega</strong>
+      Una idea equivalente a: el número en pantalla vive en el estado de React;
+      <code class="inline">setCuenta</code> avisa a React que el estado cambió y
+      obliga a redibujar el componente. Asignar
+      <code class="inline">cuenta = cuenta + 1</code> solo cambia la variable en
+      memoria, React no se entera y la pantalla queda igual.
+      Aceptá cualquier redacción propia que tenga esas dos partes
+      (el estado no cambia / la pantalla no se actualiza).
+    </div>
+  </section>
+
+  <!-- TAREA 2 -->
+  <section class="tarea">
+    <div class="tarea-cabecera">
+      <div class="tarea-numero">2</div>
+      <h2><small>Minis 8 y 10 · fetch y map</small>Más datos en la lista</h2>
+    </div>
+
+    <p>
+      Archivo: <code class="inline">Frontend/src/features/misiones/dia2/Listado.jsx</code>.
+      El <code class="inline">fetch</code> y el <code class="inline">useEffect</code>
+      no se tocan: todo el cambio está en lo que imprime cada
+      <code class="inline">&lt;li&gt;</code>. Los nombres van con guion bajo
+      porque así llegan del JSON: <code class="inline">entidad_compradora</code> y
+      <code class="inline">valor_total</code>.
+    </p>
+
+    <pre><code>return (
+  &lt;ul&gt;
+    {contratos.map((contrato) =&gt; (
+      &lt;li key={contrato.id_contrato} data-id-contrato={contrato.id_contrato}&gt;
+        {contrato.id_contrato} — {contrato.entidad_compradora}{' '}
+        — valor ${Number(contrato.valor_total).toLocaleString('es-CO')}
+      &lt;/li&gt;
+    ))}
+  &lt;/ul&gt;
+)</code></pre>
+
+    <p>
+      El formato con <code class="inline">toLocaleString</code> es optativo;
+      se acepta también el número tal cual llega
+      (<code class="inline">1234567.00</code>). Si un aprendiz lo dejó plano,
+      está bien: el criterio es que los tres datos se vean.
+    </p>
+
+    <div class="caja caja-reto">
+      <strong class="rol">Reto extra — departamento</strong>
+      Se agregó en el modelo del Día 1, así que en su JSON aparece
+      <code class="inline">departamento</code>. La línea extra:
+      <pre><code>— {contrato.departamento}</code></pre>
+    </div>
+
+    <div class="caja caja-ok">
+      <strong class="rol">Respuesta esperada en la frase de entrega</strong>
+      Una idea equivalente a: la <code class="inline">key</code> es la etiqueta
+      con que React identifica cada elemento de la lista; le sirve para saber
+      cuál cambió, cuál se agregó o cuál desapareció y actualizar solo eso en
+      lugar de redibujar toda la lista. Se acepta también la versión de
+      estabilidad (evita errores de estado compartido entre items reordenados).
+    </div>
+  </section>
+
+  <!-- TAREA 3 -->
+  <section class="tarea">
+    <div class="tarea-cabecera">
+      <div class="tarea-numero">3</div>
+      <h2><small>Mini 9 · CORS</small>Rompan CORS a propósito</h2>
+    </div>
+
+    <h3>Estado roto (lo que debe verse en su captura)</h3>
+    <ul class="caja caja">
+      <li>En <code class="inline">settings.py</code>, la lista queda con un solo
+        origen — por ejemplo solo <code class="inline">http://127.0.0.1:5173</code>.</li>
+      <li>Console (o Network) muestra el bloqueo: el mensaje típico es
+        <code class="inline">No 'Access-Control-Allow-Origin' header is present on the requested resource</code>
+        o el atajo <code class="inline">CORS error</code> en la columna Status de
+        Network.</li>
+      <li>Dato fino que distingue a quien leyó de verdad: en Network la petición
+        aparece en rojo y su status puede verse como <b>blocked:CORS</b> o
+        simplemente fallida — Django sí respondió (200 en el servidor), pero sin
+        el encabezado el navegador lo tapa. Si en la captura aparece un
+        <code class="inline">500</code> o un error de conexión, rompieron otra
+        cosa y hay que revisar juntos.</li>
+    </ul>
+
+    <h3>Estado reparado</h3>
+    <p>
+      El origen vuelve a la lista:
+    </p>
+    <pre><code>CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+]</code></pre>
+    <p>
+      Guardado + reinicio de <code class="inline">runserver</code> + lista
+      mostrando contratos otra vez. El reinicio es criterio de aprobación:
+      sin él, la reparación no se demuestra.
+    </p>
+
+    <div class="caja caja-reto">
+      <strong class="rol">Reto extra — puerto 5174</strong>
+      Falla porque el origen se define por protocolo + dominio + puerto:
+      <code class="inline">5174</code> es un origen distinto de
+      <code class="inline">5173</code>. Con esa línea, React corre en un origen
+      no autorizado y el navegador vuelve a bloquear la respuesta.
+    </div>
+
+    <div class="caja caja-ok">
+      <strong class="rol">Respuesta esperada en la explicación de 3-4 líneas</strong>
+      Debe cubrir las tres preguntas. Referencias de comparación:
+
+      <ul>
+        <li>
+          <b>Origen:</b> la combinación de protocolo + dominio + puerto
+          (<code class="inline">http://localhost:5173</code> es un origen;
+          <code class="inline">http://localhost:8000</code> es otro).
+        </li>
+        <li>
+          <b>Quién bloquea:</b> el navegador. Django respondió, sin encabezado
+          CORS el navegador recibe la respuesta y decide no dársela a la página.
+        </li>
+        <li>
+          <b><code class="inline">CORS_ALLOWED_ORIGINS</code>:</b> es la lista de
+          orígenes externos a los que Django sí les envía el encabezado
+          <code class="inline">Access-Control-Allow-Origin</code> — la lista de
+          visitantes con permiso pagado del Portero.
+        </li>
+      </ul>
+      Se aceptan todas las redacciones propias; lo que no se pasa es una
+      explicación que diga que "Django arroja el error", porque invierte a los
+      responsables.
+    </div>
+  </section>
+
+  <footer>Documento del instructor · Taller SECOP II · Día 2</footer>
+</body>
+</html>

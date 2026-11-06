@@ -1,2 +1,9 @@
-# TODO (RETO 4) - Crear el ModelSerializer de Contrato. En el Meta usa
-# extra_kwargs para que valor_total no acepte negativos (min_value = 0).
+from rest_framework import serializers
+from .models import Contrato
+
+
+class ContratoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contrato
+        fields = '__all__'
+        extra_kwargs = {'valor_total': {'min_value': 0}}

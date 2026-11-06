@@ -1,8 +1,19 @@
 """Vistas de la API de contratos."""
+import time
+
 from django.apps import apps
 from django.db import connection
+from rest_framework import status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+from .fuente_secop import TAMANO_PAGINA, consultar_pagina, fila_a_contrato
+from .models import Contrato
+from .serializers import ContratoSerializer
+
+import time
+from urllib.error import URLError
+
 
 
 # ==============================================================================
@@ -89,7 +100,10 @@ def _referencia_modelo(modelo):
     return f'{modelo._meta.app_label}.{modelo._meta.model_name}'
 
 
-# TODO (RETO 5) - Crear ContratoViewSet y conectarlo al router.
+class ContratoViewSet(viewsets.ModelViewSet):
+    """ViewSet de contratos: lista, detalle, crear, editar y borrar."""
+    queryset = Contrato.objects.all()
+    serializer_class = ContratoSerializer
 
 
 # TODO (RETO 11) - Crear descargar_contratos(cantidad) en este archivo: valida
@@ -99,6 +113,81 @@ def _referencia_modelo(modelo):
 # ignore_conflicts=True). Responde con creados, recibidos, omitidos, total,
 # ms y por_segundo. Despues escribe InyeccionMasivaView, que valida cantidad
 # responde 400 si es invalida y delega en esa funcion.
+
+def descargar_contratos(cantidad):
+    """Descarga `cantidad` contratos de SECOP II y los guarda en bloque."""
+    inicio = time.perf_counter()
+
+    identificadores = set(Contrato.objects.values_list('id_contrato', flat=True))
+    contratos_nuevos = []
+    recibidos = 0
+    desplazamiento = 0
+
+    while recibidos < cantidad:
+        limite = min(TAMANO_PAGINA, cantidad - recibidos)
+        filas = consultar_pagina(limite, desplazamiento)
+        if not filas:
+            break
+        for fila in filas:
+            if recibidos >= cantidad:
+                break
+            recibidos += 1
+            contrato = fila_a_contrato(fila)
+            if contrato is None:
+                continue
+            if contrato.id_contrato in identificadores:
+                continue
+            identificadores.add(contrato.id_contrato)
+            contratos_nuevos.append(contrato)
+        desplazamiento += len(filas)
+        if len(filas) < limite:
+            break
+
+    total_antes = Contrato.objects.count()
+    if contratos_nuevos:
+        Contrato.objects.bulk_create(
+            contratos_nuevos, batch_size=1000, ignore_conflicts=True,
+        )
+    total_despues = Contrato.objects.count()
+    creados = total_despues - total_antes
+
+    ms = (time.perf_counter() - inicio) * 1000
+    por_segundo = round(recibidos / (ms / 1000), 2) if ms > 0 else 0
+
+    return {
+        'creados': creados,
+        'recibidos': recibidos,
+        'omitidos': recibidos - creados,
+        'total': total_despues,
+        'ms': round(ms),
+        'por_segundo': por_segundo,
+    }
+
+
+class InyeccionMasivaView(APIView):
+    """POST /api/contratos/inyeccion/ — descarga masiva desde SECOP II."""
+
+    def post(self, request):
+        try:
+            cantidad = int(request.data.get('cantidad'))
+        except (TypeError, ValueError):
+            return Response(
+                {'detalle': 'cantidad debe ser un entero entre 1 y 50000.'},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        if cantidad < 1 or cantidad > 50000:
+            return Response(
+                {'detalle': 'cantidad debe ser un entero entre 1 y 50000.'},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        try:
+            resultado = descargar_contratos(cantidad)
+        except Exception as error:  # noqa: BLE001 - reportamos el fallo al cliente
+            return Response(
+                {'detalle': f'No se pudo consultar SECOP II: {error}'},
+                status=status.HTTP_502_BAD_GATEWAY,
+            )
+        return Response(resultado)
 
 
 # TODO (RETO 12) - Crear la vista de estadísticas con aggregate y annotate.
