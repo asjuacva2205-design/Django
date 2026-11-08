@@ -245,5 +245,22 @@ class EstadisticasView(APIView):
 # TODO (RETO 14) - Crear la clase de paginacion en contratos/paginacion.py.
 
 
-# TODO (RETO 15) - Crear la vista de borrado masivo: exige {"confirmar":
-# true} en el cuerpo; sin el, responde 400 y no borra nada.
+class LimpiezaMasivaView(APIView):
+    """DELETE /api/contratos/limpieza/ — vacía la tabla con confirmación."""
+
+    def delete(self, request):
+        confirmar = (
+            request.data.get('confirmar')
+            if hasattr(request.data, 'get')
+            else None
+        )
+        if confirmar is not True:
+            return Response(
+                {'detalle': 'Envía {"confirmar": true} para borrar la tabla completa.'},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        inicio = time.perf_counter()
+        eliminados, _ = Contrato.objects.all().delete()
+        ms = round((time.perf_counter() - inicio) * 1000, 2)
+        return Response({'eliminados': eliminados, 'ms': ms})

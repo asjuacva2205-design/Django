@@ -5,6 +5,7 @@ from .views import (
     EstadisticasView,
     EstadoJardinView,
     InyeccionMasivaView,
+    LimpiezaMasivaView,
 )
 
 router = DefaultRouter()
@@ -18,8 +19,11 @@ urlpatterns = [
         EstadisticasView.as_view(),
         name='contratos-estadisticas',
     ),
+    path(
+        'contratos/limpieza/',
+        LimpiezaMasivaView.as_view(),
+        name='contratos-limpieza',
+    ),
 
     *router.urls,
-
-    # TODO (RETO 15) - Agregar la ruta de borrado masivo.
 ]
