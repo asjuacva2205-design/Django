@@ -14,6 +14,7 @@ export default function Mini12Analista({ desbloqueada, aprobada, alAprobar }) {
   const [falla, setFalla] = useState(null)
   const [midiendo, setMidiendo] = useState(false)
   const [verificacion, setVerificacion] = useState(null)
+  const datosGrafica = filasPorEstado(informe?.por_estado)
 
   async function pedirMetricas() {
     if (midiendo) return
@@ -114,9 +115,8 @@ export default function Mini12Analista({ desbloqueada, aprobada, alAprobar }) {
       )}
 
       <div ref={graficaRef}>
-        {/* TODO (RETO 12) - Pasar informe.por_estado a la gráfica. */}
         <Suspense fallback={<p className="celda-suave">Cargando gráfica…</p>}>
-          <GraficaEstados />
+          <GraficaEstados datos={datosGrafica} />
         </Suspense>
       </div>
 

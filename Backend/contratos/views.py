@@ -3,6 +3,7 @@ import time
 
 from django.apps import apps
 from django.db import connection
+from django.db.models import Avg, Count, Max, Sum
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -190,7 +191,45 @@ class InyeccionMasivaView(APIView):
         return Response(resultado)
 
 
-# TODO (RETO 12) - Crear la vista de estadísticas con aggregate y annotate.
+class EstadisticasView(APIView):
+    """GET /api/contratos/estadisticas/ — informe con aggregate y annotate."""
+
+    def get(self, request):
+        metricas = Contrato.objects.aggregate(
+            total_contratos=Count('id'),
+            suma_valor_total=Sum('valor_total'),
+            promedio_valor_total=Avg('valor_total'),
+            maximo_valor_total=Max('valor_total'),
+        )
+
+        estados = (
+            Contrato.objects.values('estado')
+            .annotate(contratos=Count('id'), suma=Sum('valor_total'))
+            .order_by('estado')
+        )
+        por_estado = {
+            fila['estado']: {'contratos': fila['contratos'], 'suma': fila['suma']}
+            for fila in estados
+        }
+
+        dias = (
+            Contrato.objects.values('fecha_firma')
+            .annotate(contratos=Count('id'))
+            .order_by('fecha_firma')
+        )
+        por_dia = [
+            {
+                'fecha': fila['fecha_firma'].isoformat(),
+                'contratos': fila['contratos'],
+            }
+            for fila in dias
+        ]
+
+        return Response({
+            'metricas': metricas,
+            'por_estado': por_estado,
+            'por_dia': por_dia,
+        })
 
 
 # TODO (RETO 13) - Agregar SearchFilter, el filtro ?estado= en get_queryset()
