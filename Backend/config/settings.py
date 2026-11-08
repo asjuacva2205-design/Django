@@ -102,4 +102,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-# TODO (RETO 14) - Activar la paginación global.
+# RETO 14 - Paginación global: el panel espera {count, next, previous, results}
+# y poder recortar la página con ?page_size=.
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'contratos.paginacion.PaginacionContratos',
+}
