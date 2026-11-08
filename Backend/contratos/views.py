@@ -12,9 +12,6 @@ from .fuente_secop import TAMANO_PAGINA, consultar_pagina, fila_a_contrato
 from .models import Contrato
 from .serializers import ContratoSerializer
 
-import time
-from urllib.error import URLError
-
 
 
 # ==============================================================================
@@ -107,7 +104,7 @@ class ContratoViewSet(viewsets.ModelViewSet):
     serializer_class = ContratoSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['id_contrato', 'entidad_compradora', 'descripcion']
-    ordering_fields = ['valor_total', 'fecha_firma']
+    ordering_fields = ['valor_total', 'fecha_firma', 'id_contrato']
 
     def get_queryset(self):
         queryset = Contrato.objects.all()
