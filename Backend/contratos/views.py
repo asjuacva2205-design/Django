@@ -4,7 +4,7 @@ import time
 from django.apps import apps
 from django.db import connection
 from django.db.models import Avg, Count, Max, Sum
-from rest_framework import status, viewsets
+from rest_framework import filters, status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -105,6 +105,16 @@ class ContratoViewSet(viewsets.ModelViewSet):
     """ViewSet de contratos: lista, detalle, crear, editar y borrar."""
     queryset = Contrato.objects.all()
     serializer_class = ContratoSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['id_contrato', 'entidad_compradora', 'descripcion']
+    ordering_fields = ['valor_total', 'fecha_firma']
+
+    def get_queryset(self):
+        queryset = Contrato.objects.all()
+        estado = self.request.query_params.get('estado')
+        if estado:
+            queryset = queryset.filter(estado__iexact=estado)
+        return queryset
 
 
 # TODO (RETO 11) - Crear descargar_contratos(cantidad) en este archivo: valida
@@ -230,10 +240,6 @@ class EstadisticasView(APIView):
             'por_estado': por_estado,
             'por_dia': por_dia,
         })
-
-
-# TODO (RETO 13) - Agregar SearchFilter, el filtro ?estado= en get_queryset()
-# y OrderingFilter a ContratoViewSet.
 
 
 # TODO (RETO 14) - Crear la clase de paginacion en contratos/paginacion.py.
