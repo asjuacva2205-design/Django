@@ -1,4 +1,3 @@
-// TODO (RETO 12) - Crear la vista y ruta de estadísticas.
 import { lazy, Suspense, useRef, useState } from 'react'
 import MisionMarco from '../MisionMarco'
 import { API_URL, pedirOExplotar } from '../../../shared/api'

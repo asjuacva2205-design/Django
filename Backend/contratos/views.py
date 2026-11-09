@@ -243,21 +243,17 @@ class EstadisticasView(APIView):
 
 
 class LimpiezaMasivaView(APIView):
-    """DELETE /api/contratos/limpieza/ — vacía la tabla con confirmación."""
+    """DELETE /api/contratos/limpieza/ — vacia la tabla solo con {"confirmar": true}."""
 
     def delete(self, request):
-        confirmar = (
-            request.data.get('confirmar')
-            if hasattr(request.data, 'get')
-            else None
-        )
+        confirmar = request.data.get('confirmar') if hasattr(request.data, 'get') else None
         if confirmar is not True:
             return Response(
-                {'detalle': 'Envía {"confirmar": true} para borrar la tabla completa.'},
+                {'detalle': 'El cuerpo debe traer {"confirmar": true}.'},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
         inicio = time.perf_counter()
         eliminados, _ = Contrato.objects.all().delete()
-        ms = round((time.perf_counter() - inicio) * 1000, 2)
-        return Response({'eliminados': eliminados, 'ms': ms})
+        ms = (time.perf_counter() - inicio) * 1000
+        return Response({'eliminados': eliminados, 'ms': round(ms)})
