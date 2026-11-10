@@ -18,6 +18,7 @@ import Mini12Analista from '../features/misiones/dia3/Mini12_Analista'
 import Mini13AgujaPajar from '../features/misiones/dia3/Mini13_AgujaPajar'
 import Mini14Regulador from '../features/misiones/dia3/Mini14_Regulador'
 import Mini15Limpiador from '../features/misiones/dia3/Mini15_Limpiador'
+import Mini16Llave from '../features/misiones/dia3/Mini16_Llave'
 import {
   aprobarMision,
   borrarTablero,
@@ -40,6 +41,7 @@ const COMPONENTES_MISION = {
   13: Mini13AgujaPajar,
   14: Mini14Regulador,
   15: Mini15Limpiador,
+  16: Mini16Llave,
 }
 
 export default function App() {

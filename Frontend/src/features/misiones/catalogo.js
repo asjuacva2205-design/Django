@@ -14,4 +14,5 @@ export const MISIONES = [
   { numero: 13, dia: 3, alias: 'Mini 13', titulo: 'La Aguja en el Pajar' },
   { numero: 14, dia: 3, alias: 'Mini 14', titulo: 'El Regulador' },
   { numero: 15, dia: 3, alias: 'Mini 15', titulo: 'El Limpiador' },
+  { numero: 16, dia: 3, alias: 'Mini 16', titulo: 'La Llave' },
 ]
