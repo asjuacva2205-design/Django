@@ -1,5 +1,4 @@
-export const API_URL = 'http://127.0.0.1:8000/api'
-
+export const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api'
 export class FallaApi extends Error {
   constructor(tipo, mensaje) {
     super(mensaje)
@@ -26,7 +25,7 @@ export async function peticion(ruta, opciones = {}) {
     throw new FallaApi(
       'cors',
       'No hubo respuesta de Django. Revisa que el servidor esté activo ' +
-        'en el puerto 8000 y que CORS esté configurado.',
+      'en el puerto 8000 y que CORS esté configurado.',
     )
   }
 }
